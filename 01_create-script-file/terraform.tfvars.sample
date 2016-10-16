@@ -1,0 +1,7 @@
+# Rename: terraform.tfvars.sample → terraform.tfvars
+
+# リージョンを東京に設定
+target_region = "ap-northeast-1"
+
+# Slack WebhookのURL
+# slack_webhook_url = "https://hooks.slack.com/services/*********/*********/************************"
