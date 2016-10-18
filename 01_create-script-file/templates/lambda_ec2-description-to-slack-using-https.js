@@ -18,9 +18,9 @@ exports.handler = () => {
 	const params = {};
 	ec2.describeInstances(params, (err, data) => {
 		if (err) {
-			const message = `[${err.code}] ${err.message}`;
-			console.log(message);
-			postToSlack(message);
+			const error_text = `[${err.code}] ${err.message}`;
+			console.log(error_text);
+			postToSlack(error_text);
 		} else {
 			const nested_instances = data.Reservations.map(reservation => {
 				const instances = reservation.Instances.map(instance => {
@@ -35,15 +35,15 @@ exports.handler = () => {
 			});
 			const instances = Array.prototype.concat.apply([], nested_instances);
 
-			const message = instances.sort((a, b) => {
+			const text = instances.sort((a, b) => {
 				if (a.state > b.state) return 1;
 				if (a.state < b.state) return -1;
 				return 0;
 			}).map(_ => {
 				return `[${_.state}] ${_.type}, ${_.name}: ${_.id}`;
 			}).join("\n");
-			console.log(message);
-			postToSlack(message);
+			console.log(text);
+			postToSlack(text);
 		}
 	});
 };
