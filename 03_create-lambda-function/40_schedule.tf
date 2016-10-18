@@ -1,7 +1,7 @@
 
 resource "aws_cloudwatch_event_rule" "every_hour" {
-	name = "every-1-hour"
-	schedule_expression = "rate(1 hour)"
+	name = "${var.schedule_name}"
+	schedule_expression = "${var.schedule_expression}"
 }
 
 resource "aws_cloudwatch_event_target" "notification_every_hour" {

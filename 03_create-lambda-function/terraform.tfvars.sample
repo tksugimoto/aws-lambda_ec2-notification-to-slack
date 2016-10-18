@@ -9,3 +9,8 @@ prefix = "Slack-notification"
 
 # リージョンを東京に設定
 region = "ap-northeast-1"
+
+# スケジュール設定
+# 参考: http://docs.aws.amazon.com/ja_jp/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html
+schedule_name = "every-1-hour"
+schedule_expression = "rate(1 hour)"
