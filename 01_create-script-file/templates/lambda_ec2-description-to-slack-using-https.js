@@ -22,7 +22,7 @@ exports.handler = () => {
 			console.log(message);
 			postToSlack(message);
 		} else {
-			data.Reservations.forEach(reservation => {
+			const nested_instances = data.Reservations.map(reservation => {
 				const instances = reservation.Instances.map(instance => {
 					const id = instance.InstanceId;
 					const type = instance.InstanceType;
@@ -31,12 +31,19 @@ exports.handler = () => {
 					const name = nameObj ? nameObj.Value : "[不明]";
 					return {id, type, state, name};
 				});
-				const message = instances.map(_ => {
-					return `${_.id}: [${_.state}] ${_.type}, ${_.name}`;
-				}).join("\n");
-				console.log(message);
-				postToSlack(message);
+				return instances;
 			});
+			const instances = Array.prototype.concat.apply([], nested_instances);
+
+			const message = instances.sort((a, b) => {
+				if (a.state > b.state) return 1;
+				if (a.state < b.state) return -1;
+				return 0;
+			}).map(_ => {
+				return `[${_.state}] ${_.type}, ${_.name}: ${_.id}`;
+			}).join("\n");
+			console.log(message);
+			postToSlack(message);
 		}
 	});
 };
