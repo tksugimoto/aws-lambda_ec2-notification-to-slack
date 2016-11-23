@@ -9,8 +9,11 @@ AWS Lambda(Node.js)でEC2の起動状況をSlackに投げる（構成をTerrafor
 	1. `cd 01_create-script-file`
 	1. `cp terraform.tfvars.sample terraform.tfvars`
 	1. `terraform.tfvars` に設定を書き込む
-		* target_region (監視対象のEC2)
-		* slack_webhook_url
+		* [**必須**] `target_region` (監視対象のEC2)
+		* [**必須**] `slack_webhook_url`
+		* [任意] `channel` (投稿先チャンネル名)
+		* [任意] `username` (投稿表示名)
+		* [任意] `icon_emoji` (アイコン)
 	1. `terraform apply`
 1. 作成されたscriptをzip
 	1. `cd 02_zip-index.js`
