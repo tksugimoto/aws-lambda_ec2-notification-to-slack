@@ -4,8 +4,9 @@ const AWS = require("aws-sdk");
 /**** 設定ここから ****/
 const target_region = "%target_region%";
 const slack_webhook_url = "%slack_webhook_url%"
-const username = "aws-lambda";
-const icon_emoji = ":ghost:";
+const channel = "%channel%"
+const username = "%username%";
+const icon_emoji = "%icon_emoji%";
 /**** 設定ここまで ****/
 
 AWS.config.update({
@@ -66,6 +67,7 @@ function postToSlack(text) {
 		});
 
 		const body = JSON.stringify({
+			channel: channel,
 			username: username,
 			icon_emoji: icon_emoji,
 			text: text
