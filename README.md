@@ -5,7 +5,6 @@ AWS Lambda(Node.js)でEC2の起動状況をSlackに投げる（構成をTerrafor
 1. 事前準備
 	* terraform をインストール
 1. lamnda関数を作成
-	1. `cd 03_create-lambda-function`
 	1. `cp terraform.tfvars.sample terraform.tfvars`
 	1. `terraform.tfvars` に設定を書き込む
 		* aws_access_key
