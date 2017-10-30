@@ -1,12 +1,12 @@
-const https = require("https");
-const AWS = require("aws-sdk");
+const https = require('https');
+const AWS = require('aws-sdk');
 
 /**** 設定ここから ****/
 const target_region = process.env.target_region;
 const slack_webhook_url = process.env.slack_webhook_url;
-const channel = process.env.channel || "";
-const username = process.env.username || "";
-const icon_emoji = process.env.icon_emoji || "";
+const channel = process.env.channel || '';
+const username = process.env.username || '';
+const icon_emoji = process.env.icon_emoji || '';
 /**** 設定ここまで ****/
 
 AWS.config.update({
@@ -28,8 +28,8 @@ exports.handler = () => {
 					const id = instance.InstanceId;
 					const type = instance.InstanceType;
 					const state = instance.State.Name;
-					const nameObj = instance.Tags.find(tag => tag.Key === "Name");
-					const name = nameObj ? nameObj.Value : "[不明]";
+					const nameObj = instance.Tags.find(tag => tag.Key === 'Name');
+					const name = nameObj ? nameObj.Value : '[不明]';
 					return {id, type, state, name};
 				});
 				return instances;
@@ -42,7 +42,7 @@ exports.handler = () => {
 				return 0;
 			}).map(_ => {
 				return `[${_.state}] ${_.type}, ${_.name}: ${_.id}`;
-			}).join("\n");
+			}).join('\n');
 			console.log(text);
 			postToSlack(text);
 		}
@@ -56,13 +56,13 @@ function postToSlack(text) {
 		const options = {
 			host,
 			path,
-			method: "POST",
+			method: 'POST',
 		};
 		const req = https.request(options, res => {
-			res.on("data", chunk => {
-				console.log("[OK] " + chunk.toString());
+			res.on('data', chunk => {
+				console.log('[OK] ' + chunk.toString());
 			}).on('error', e => {
-				console.log("ERROR:" + e.stack);
+				console.log('ERROR:' + e.stack);
 			});
 		});
 
