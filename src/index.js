@@ -14,7 +14,7 @@ AWS.config.update({
 });
 
 exports.handler = () => {
-	var ec2 = new AWS.EC2();
+	const ec2 = new AWS.EC2();
 
 	const params = {};
 	ec2.describeInstances(params, (err, data) => {
