@@ -10,7 +10,7 @@ const icon_emoji = process.env.icon_emoji || "";
 /**** 設定ここまで ****/
 
 AWS.config.update({
-	region: target_region
+	region: target_region,
 });
 
 exports.handler = () => {
@@ -56,7 +56,7 @@ function postToSlack(text) {
 		const options = {
 			host,
 			path,
-			method: "POST"
+			method: "POST",
 		};
 		const req = https.request(options, res => {
 			res.on("data", chunk => {
@@ -70,7 +70,7 @@ function postToSlack(text) {
 			channel,
 			username,
 			icon_emoji,
-			text
+			text,
 		});
 
 		req.write(body);
