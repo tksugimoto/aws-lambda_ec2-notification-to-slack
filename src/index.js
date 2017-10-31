@@ -55,13 +55,6 @@ exports.handler = () => {
 function postToSlack(text) {
 	const options = parseUrl(slack_webhook_url);
 	options.method = 'POST';
-	const req = https.request(options, res => {
-		res.on('data', chunk => {
-			console.log('[OK] ' + chunk.toString());
-		}).on('error', e => {
-			console.log('ERROR:' + e.stack);
-		});
-	});
 
 	const body = JSON.stringify({
 		channel,
@@ -70,7 +63,12 @@ function postToSlack(text) {
 		text,
 	});
 
-	req.write(body);
-
-	req.end();
+	https.request(options, res => {
+		res.on('data', chunk => {
+			console.log('[OK] ' + chunk.toString());
+		}).on('error', e => {
+			console.log('ERROR:' + e.stack);
+		});
+	})
+	.end(body);
 }
