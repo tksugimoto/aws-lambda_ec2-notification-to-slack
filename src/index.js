@@ -43,8 +43,8 @@ exports.handler = () => {
 				if (a.state > b.state) return 1;
 				if (a.state < b.state) return -1;
 				return 0;
-			}).map(_ => {
-				return `[${_.state}] ${_.type}, ${_.name}: ${_.id}`;
+			}).map(({ state, type, name, id }) => {
+				return `[${state}] ${type}, ${name}: ${id}`;
 			}).join('\n');
 			console.log(text);
 			postToSlack(text);
