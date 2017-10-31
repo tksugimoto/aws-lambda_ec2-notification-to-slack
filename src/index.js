@@ -5,15 +5,15 @@ const https = require('https');
 const AWS = require('aws-sdk');
 
 /**** 設定ここから ****/
-const target_region = process.env.target_region;
-const slack_webhook_url = process.env.slack_webhook_url;
+const targetRegion = process.env.target_region;
+const slackWebhookUrl = process.env.slack_webhook_url;
 const channel = process.env.channel || '';
 const username = process.env.username || '';
-const icon_emoji = process.env.icon_emoji || '';
+const iconEmoji = process.env.icon_emoji || '';
 /**** 設定ここまで ****/
 
 AWS.config.update({
-	region: target_region,
+	region: targetRegion,
 });
 
 exports.handler = () => {
@@ -22,11 +22,11 @@ exports.handler = () => {
 	const params = {};
 	ec2.describeInstances(params, (err, data) => {
 		if (err) {
-			const error_text = `[${err.code}] ${err.message}`;
-			console.log(error_text);
-			postToSlack(error_text);
+			const errorText = `[${err.code}] ${err.message}`;
+			console.log(errorText);
+			postToSlack(errorText);
 		} else {
-			const nested_instances = data.Reservations.map(reservation => {
+			const nestedInstances = data.Reservations.map(reservation => {
 				const instances = reservation.Instances.map(instance => {
 					const id = instance.InstanceId;
 					const type = instance.InstanceType;
@@ -37,7 +37,7 @@ exports.handler = () => {
 				});
 				return instances;
 			});
-			const instances = Array.prototype.concat.apply([], nested_instances);
+			const instances = Array.prototype.concat.apply([], nestedInstances);
 
 			const text = instances.sort((a, b) => {
 				if (a.state > b.state) return 1;
@@ -53,13 +53,13 @@ exports.handler = () => {
 };
 
 function postToSlack(text) {
-	const options = parseUrl(slack_webhook_url);
+	const options = parseUrl(slackWebhookUrl);
 	options.method = 'POST';
 
 	const body = JSON.stringify({
 		channel,
 		username,
-		icon_emoji,
+		icon_emoji: iconEmoji,
 		text,
 	});
 
