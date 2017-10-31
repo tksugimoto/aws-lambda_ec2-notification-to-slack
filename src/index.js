@@ -65,9 +65,9 @@ function postToSlack(text) {
 
 	https.request(options, res => {
 		res.on('data', chunk => {
-			console.log('[OK] ' + chunk.toString());
+			console.log(`[OK] ${chunk}`);
 		}).on('error', e => {
-			console.log('ERROR:' + e.stack);
+			console.log(`ERROR: ${e.stack}`);
 		});
 	})
 	.end(body);
