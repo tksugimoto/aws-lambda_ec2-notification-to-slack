@@ -47,7 +47,8 @@ exports.handler = () => {
 			}).map(instance => {
 				return textFormat.replace(/%{[^}]+}/g, (matchedText) => {
 					const key = matchedText.slice(2, -1);
-					return instance[key] || matchedText;
+					const value = instance[key];
+					return typeof value !== 'undefined' ? value : matchedText;
 				});
 			}).join('\n');
 			console.log(text);
