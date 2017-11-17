@@ -36,3 +36,13 @@ target_region = "ap-northeast-1"
 # format: ":icon_name:"
 # デフォルト（空文字）はWebhookのデフォルト値
 # icon_emoji = ":slack:"
+
+# 各インスタンスの状態を通知するテキストのフォーマット
+# 変数の使用方法
+#   %{var_name}
+# 使用可能変数
+#   state: インスタンスの状態（例: "running", "stopped"）
+#   type: インスタンスタイプ（例: "t2.nano"）
+#   name: インスタンス名（タグのNameキーの値）
+#   id: instance ID（例: "i-xxxxxxxxxxxxxxxxx"）
+ec2_instance_state_text_format = "[%{state}] %{type}, %{name}: %{id}"

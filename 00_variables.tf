@@ -39,3 +39,7 @@ variable "username" {
 variable "icon_emoji" {
 	default = ""
 }
+
+variable "ec2_instance_state_text_format" {
+	description = "各インスタンスの状態を通知するテキストのフォーマット"
+}

@@ -19,6 +19,13 @@ AWS Lambda(Node.js)でEC2の起動状況をSlackに投げる（構成を [Terraf
 		* [任意] `channel` (投稿先チャンネル名)
 		* [任意] `username` (投稿表示名)
 		* [任意] `icon_emoji` (アイコン)
+		* `ec2_instance_state_text_format` (通知テキストのフォーマット)
+			* `state`, `type`, `name`, `id` の変数を使用可能
+			* 変数は `%{変数名}` の形で書くと変換される
+			* 例
+				* `"[%{state}] %{type}, %{name}: %{id}"`
+				* `"[:amazon-ec2-%{state}:] %{type}, %{name}: %{id}"`
+					* Slackにアイコンを登録しておけば状態をアイコンで表示することも可能
 	1. デプロイ
 		```
 		terraform apply
