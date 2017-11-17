@@ -20,6 +20,7 @@ resource "aws_lambda_function" "notification" {
 			channel           = "${var.channel}"
 			username          = "${var.username}"
 			icon_emoji        = "${var.icon_emoji}"
+			text_format       = "${var.ec2_instance_state_text_format}"
 		}
 	}
 }

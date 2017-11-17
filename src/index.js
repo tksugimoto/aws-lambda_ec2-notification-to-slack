@@ -10,6 +10,7 @@ const slackWebhookUrl = process.env.slack_webhook_url;
 const channel = process.env.channel || '';
 const username = process.env.username || '';
 const iconEmoji = process.env.icon_emoji || '';
+const textFormat = process.env.text_format;
 /**** 設定ここまで ****/
 
 AWS.config.update({
@@ -43,8 +44,11 @@ exports.handler = () => {
 				if (a.state > b.state) return 1;
 				if (a.state < b.state) return -1;
 				return 0;
-			}).map(({ state, type, name, id }) => {
-				return `[${state}] ${type}, ${name}: ${id}`;
+			}).map(instance => {
+				return textFormat.replace(/%{[^}]+}/g, (matchedText) => {
+					const key = matchedText.slice(2, -1);
+					return instance[key] || matchedText;
+				});
 			}).join('\n');
 			console.log(text);
 			postToSlack(text);
