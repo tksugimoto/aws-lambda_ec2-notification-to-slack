@@ -43,7 +43,6 @@ variable "channel" {
 
 # Slack 通知のユーザー表示
 # デフォルト（空文字）はWebhookのデフォルト値
-# 既知の問題: 半角スペース以降は無視
 variable "username" {
 	description = "Slack 通知のユーザー表示"
 	default = ""
