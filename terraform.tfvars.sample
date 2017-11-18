@@ -25,17 +25,16 @@ target_region = "ap-northeast-1"
 # Slack 投稿先チャンネル
 # format: "#channel-name"
 # デフォルト（空文字）はWebhookのデフォルト値
-# channel = "#AWS-notification"
+channel = ""
 
 # Slack 通知のユーザー表示
 # デフォルト（空文字）はWebhookのデフォルト値
-# 既知の問題: 半角スペース以降は無視
-# username = "Amazon_EC2"
+username = ""
 
 # Slack 通知のアイコン
 # format: ":icon_name:"
 # デフォルト（空文字）はWebhookのデフォルト値
-# icon_emoji = ":slack:"
+icon_emoji = ""
 
 # 各インスタンスの状態を通知するテキストのフォーマット
 # 変数の使用方法
