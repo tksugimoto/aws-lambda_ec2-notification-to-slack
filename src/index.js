@@ -43,6 +43,8 @@ exports.handler = () => {
 			const text = instances.sort((a, b) => {
 				if (a.state > b.state) return 1;
 				if (a.state < b.state) return -1;
+				if (a.name > b.name) return 1;
+				if (a.name < b.name) return -1;
 				return 0;
 			}).map(instance => {
 				return textFormat.replace(/%{[^}]+}/g, (matchedText) => {
