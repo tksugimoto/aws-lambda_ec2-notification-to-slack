@@ -12,7 +12,7 @@ region = "ap-northeast-1"
 
 # スケジュール設定
 # 参考: http://docs.aws.amazon.com/ja_jp/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html
-schedule_name = "every_1_hour"
+schedule_description = "every_1_hour"
 schedule_expression = "rate(1 hour)"
 
 
