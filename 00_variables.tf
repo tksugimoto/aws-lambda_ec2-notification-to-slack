@@ -18,8 +18,8 @@ variable "region" {
 }
 
 # スケジュール設定
-variable "schedule_name" {
-  description = "スケジュール定義名"
+variable "schedule_description" {
+  description = "スケジュール説明"
 }
 
 variable "schedule_expression" {

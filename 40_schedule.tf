@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_event_rule" "schedule" {
-  name                = "${var.prefix}-${var.schedule_name}"
+  name                = "${var.prefix}"
+  description         = "${var.schedule_description}"
   schedule_expression = "${var.schedule_expression}"
 }
 
